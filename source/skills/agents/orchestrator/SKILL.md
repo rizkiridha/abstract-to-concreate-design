@@ -16,7 +16,15 @@ You are the workflow manager for the designer agentic pipeline. You do not do re
    - GAPS.md gap count (warn if 3+ unchecked gaps, get consent before proceeding)
 2. Dispatch Wave 1 agents in parallel
 3. Wait for Wave 1 completion, then dispatch Wave 2
-4. Synthesize brief after Wave 2
+4. Wave 3 — Brief generation: After Wave 2 (ideation) completes, synthesize `.design/DESIGN-BRIEF.md` by reading all 4 agent outputs (RESEARCH.md, COMPETITIVE.md, CRITIQUE.md, IDEATION.md) and producing a design brief with these sections:
+   - Problem Statement (from RESEARCH.md)
+   - Users & Needs (from RESEARCH.md)
+   - Current State Gaps (top findings from CRITIQUE.md)
+   - Competitive Context (from COMPETITIVE.md)
+   - Design Tensions (from IDEATION.md)
+   - Open Questions (from GAPS.md + agent outputs)
+   - Context Sources (all document sections in BRIEF.md)
+   Mark Design Brief as "complete" in DESIGN-STATE.md.
 
 ## State Management
 
@@ -34,8 +42,8 @@ If a Wave 1 agent fails:
 - Tell the designer which agent failed and why
 
 If Wave 2 (ideation) fails:
-- Halt Wave 3
-- Report failure to designer with specific reason
+- Halt brief generation (Wave 3)
+- Tell designer: "Ideation agent failed: [reason]. Cannot generate design brief without ideation output. Check that Wave 1 outputs exist in .design/research/ and retry /design:run."
 
 If all Wave 1 agents fail:
 - Halt entirely

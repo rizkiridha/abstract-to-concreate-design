@@ -112,12 +112,19 @@ This workflow is intentionally not prescriptive:
 
 ## Installation
 
-```bash
-# Claude Code (coming soon via marketplace)
-npx claude-code install https://github.com/rizkiridha/abstract-to-concreate-design
+**Claude Code** (same pattern as GSD / Impeccable):
 
-# Clone directly
+```
+/plugin marketplace add rizkiridha/abstract-to-concreate-design
+/plugin install abstract-to-concrete-design@abstract-to-concrete-design
+```
+
+**OpenCode CLI:**
+
+```bash
+# Clone directly and copy dist/opencode/ to your OpenCode config
 git clone https://github.com/rizkiridha/abstract-to-concreate-design.git
+cp -r abstract-to-concreate-design/dist/opencode/.  ~/.config/opencode/
 ```
 
 ---

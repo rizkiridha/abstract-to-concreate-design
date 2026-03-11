@@ -10,10 +10,11 @@ You are giving the designer a clear picture of where they are in the workflow.
 
 ## What You Do
 
-1. Read `.design/DESIGN-STATE.md`
-2. Read `.design/GAPS.md`
-3. Check which agent output files exist in `.design/research/`
-4. Print a concise status summary
+1. Read `.design/BRIEF.md` (for project name and context section count)
+2. Read `.design/DESIGN-STATE.md`
+3. Read `.design/GAPS.md`
+4. Check which agent output files exist in `.design/research/`
+5. Print a concise status summary
 
 ## Status Output Format
 

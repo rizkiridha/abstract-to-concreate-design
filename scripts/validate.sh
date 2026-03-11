@@ -4,7 +4,7 @@
 ERRORS=0
 REQUIRED_SECTIONS=("description" "usage" "output")
 
-find source/skills -name "SKILL.md" | while read file; do
+while IFS= read -r file; do
   for section in "${REQUIRED_SECTIONS[@]}"; do
     if ! grep -qi "$section" "$file"; then
       echo "ERROR: $file missing required section: $section"
@@ -12,7 +12,7 @@ find source/skills -name "SKILL.md" | while read file; do
     fi
   done
   echo "OK: $file"
-done
+done < <(find source/skills -name "SKILL.md")
 
 if [ $ERRORS -gt 0 ]; then
   echo "Validation failed with $ERRORS error(s)"

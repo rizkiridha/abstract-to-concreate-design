@@ -13,10 +13,11 @@ You are helping a designer accumulate project context before running research ag
 1. Ask the designer to paste their content (MoM, email, chat, research doc, etc.)
 2. Ingest the content
 3. Append it to `.design/BRIEF.md` under a new dated section
-4. Analyze the full contents of `BRIEF.md` and update `.design/GAPS.md`:
+4. Mark the context feeding step as complete in `.design/DESIGN-STATE.md` by updating `- [ ] Context feeding` to `- [x] Context feeding`
+5. Analyze the full contents of `BRIEF.md` and update `.design/GAPS.md`:
    - **What I understand:** summarize the problem, users, constraints, decisions made
    - **What's missing:** list specific gaps (e.g., "no user research data", "no competitor context", "unclear what success looks like")
-5. Ask: "Is there more context you'd like to add, or are you ready to run the agents?"
+6. Ask: "Is there more context you'd like to add, or are you ready to run the agents?"
 
 ## Gap Detection Heuristics
 

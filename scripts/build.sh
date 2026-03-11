@@ -1,5 +1,6 @@
 #!/bin/bash
 # Builds dist/ for each platform target from source/
+cd "$(dirname "$0")/.." || exit 1
 
 set -e
 

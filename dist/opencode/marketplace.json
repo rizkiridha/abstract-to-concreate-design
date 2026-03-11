@@ -1,0 +1,8 @@
+{
+  "name": "abstract-to-concrete-design",
+  "description": "Evidence-based design brief workflow for designers. Feed context, run parallel agents, get a design brief — before you open Figma.",
+  "category": "design",
+  "tags": ["design", "ux", "research", "design-brief", "agentic"],
+  "platforms": ["claude-code", "opencode"],
+  "entry": "design:new"
+}

@@ -2,7 +2,7 @@
   "name": "abstract-to-concrete-design",
   "version": "1.0.0",
   "description": "Agentic workflow for designers — from abstract problem space to evidence-based design brief. Research, competitive analysis, and UX critique run in parallel to produce a design brief before you open Figma.",
-  "author": { "name": "rizkiridha", "github": "rizkiridha" },
+  "author": { "name": "rizkiridha", "url": "https://github.com/rizkiridha" },
   "repository": "https://github.com/rizkiridha/abstract-to-concreate-design",
   "skills": "./skills"
 }

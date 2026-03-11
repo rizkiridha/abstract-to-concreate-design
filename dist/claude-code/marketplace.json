@@ -1,20 +1,18 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "abstract-to-concrete-design",
-  "metadata": {
-    "description": "Evidence-based design brief workflow for designers. Feed context, run parallel agents, get a design brief — before you open Figma."
-  },
+  "version": "1.0.0",
+  "description": "Evidence-based design brief workflow for designers. Feed context, run parallel agents, get a design brief — before you open Figma.",
   "owner": {
     "name": "rizkiridha",
-    "github": "rizkiridha"
+    "url": "https://github.com/rizkiridha"
   },
   "plugins": [
     {
       "name": "abstract-to-concrete-design",
+      "description": "Agentic workflow for designers — research, competitive analysis, and UX critique run in parallel to produce an evidence-based design brief before you open Figma.",
       "source": "./",
-      "category": "design",
-      "homepage": "https://github.com/rizkiridha/abstract-to-concreate-design",
-      "tags": ["design", "ux", "research", "design-brief", "agentic", "workflow"]
+      "category": "design"
     }
   ]
 }

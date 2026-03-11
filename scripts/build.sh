@@ -26,8 +26,8 @@ for platform in "${PLATFORMS[@]}"; do
   # Copy docs
   cp -r "$SOURCE_DIR/docs/"* "$TARGET/docs/"
 
-  # Copy plugin config
-  cp ".claude-plugin/plugin.json" "$TARGET/"
+  # Copy plugin config, fixing skills path to be relative to dist target
+  sed 's|"./source/skills"|"./skills"|g' ".claude-plugin/plugin.json" > "$TARGET/plugin.json"
   cp ".claude-plugin/marketplace.json" "$TARGET/"
 
   echo "Built $platform -> $TARGET"

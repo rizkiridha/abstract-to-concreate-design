@@ -8,19 +8,37 @@ user-invokable: true
 
 You are the orchestrator for the designer agentic workflow. Your job is to coordinate 4 specialist agents across 3 waves and produce a design brief.
 
+## Read Learning Logs First
+
+Before starting, check for past issues:
+1. Read `.design/LEARNING-LOG.md` if it exists
+2. Read `~/.design-agent-learning/global-log.md` if it exists
+3. Note any relevant past failures that might affect this run
+
 ## Pre-flight Check
 
 Before firing any agents:
 
-1. Verify `.design/BRIEF.md` exists and has at least one "Context Added" section. If not:
-   > "No context found. Run `/design:feed` first to add project context."
-   Stop.
+1. Verify `.design/BRIEF.md` exists and has at least one "Context Added" section with actual content:
+   - Parse the most recent "Context Added" section
+   - If content is empty or whitespace-only, warn: "The most recent context section appears empty. Add content before running agents."
+   - If no valid content, stop.
 
 2. Verify `.design/DESIGN-STATE.md` has a production URL or "Screenshot provided". If not:
    > "No production reference found. Re-run `/design:new` and provide a production URL or screenshot."
    Stop.
 
-3. Read `.design/GAPS.md`. If it contains 3+ unchecked gaps:
+3. Verify production URL is likely accessible:
+   - Check URL format is valid
+   - If URL looks malformed (not https?://), warn but don't block
+   - Note: Cannot verify URL accessibility without network access - this will be checked by Critique agent
+
+4. Check for existing agent outputs:
+   - If `.design/research/` contains any completed outputs, warn:
+     > "Existing agent outputs found. Running again will overwrite them. Continue? (yes/no)"
+   - If yes, proceed with overwriting
+
+5. Read `.design/GAPS.md`. If it contains 3+ unchecked gaps:
    > "I notice some gaps in the context: [list gaps]. You can proceed, but these may affect output quality. Continue? (yes/no)"
    If yes, proceed. Never block without consent.
 
@@ -35,6 +53,11 @@ Dispatch these 3 agents simultaneously. Each reads from `.design/` and writes it
 Tell the designer: "Running research, competitive analysis, and UX critique in parallel..."
 
 Wait for all three to complete before proceeding to Wave 2.
+
+**Validate Wave 1 outputs before Wave 2:**
+- Check that RESEARCH.md, COMPETITIVE.md, CRITIQUE.md all exist in `.design/research/`
+- Verify each file has meaningful content (not empty, not just headers)
+- If any are missing or empty, log to LEARNING-LOG.md and notify designer before proceeding
 
 ## Wave 2 — Sequential (Ideation)
 
@@ -79,6 +102,15 @@ Generated: [DATE]
 ## Update DESIGN-STATE.md
 
 After all waves complete, update `.design/DESIGN-STATE.md` to mark all steps complete.
+
+## Update Learning Log
+
+After all agents complete (success or with issues), append to `.design/LEARNING-LOG.md`:
+- What succeeded
+- What issues were encountered
+- Any warnings that were surfaced
+
+If any agent failed, also append to global log `~/.design-agent-learning/global-log.md`.
 
 ## Final Message to Designer
 

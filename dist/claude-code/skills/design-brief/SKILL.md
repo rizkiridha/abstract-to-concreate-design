@@ -8,6 +8,12 @@ user-invokable: true
 
 You are regenerating the design brief from already-completed agent outputs.
 
+## Read Learning Logs First
+
+Before regenerating, check for past issues:
+1. Read `.design/LEARNING-LOG.md` if it exists
+2. Note any relevant patterns from past runs
+
 ## Pre-flight Check
 
 Verify these files exist in `.design/research/`:
@@ -19,6 +25,10 @@ Verify these files exist in `.design/research/`:
 If any are missing:
 > "Missing agent outputs: [list]. Run `/design:run` first to generate all agent outputs."
 Stop.
+
+**Validate output quality:**
+- Check each file has meaningful content (not empty, not just headers)
+- If any are empty or too short, warn: "[file] appears incomplete. Results may be affected."
 
 ## What You Do
 

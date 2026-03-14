@@ -17,7 +17,10 @@ You are helping a designer accumulate project context before running research ag
 5. Analyze the full contents of `BRIEF.md` and update `.design/GAPS.md`:
    - **What I understand:** summarize the problem, users, constraints, decisions made
    - **What's missing:** list specific gaps (e.g., "no user research data", "no competitor context", "unclear what success looks like")
-6. Ask: "Is there more context you'd like to add, or are you ready to run the agents?"
+6. Ask: "Is there more context you'd like to add, or are you ready to validate your understanding?"
+
+7. If ready to validate, prompt:
+   > "Run `/design:validate` to verify problem understanding, check stakeholder alignment, and assess context freshness before running agents."
 
 ## Gap Detection Heuristics
 

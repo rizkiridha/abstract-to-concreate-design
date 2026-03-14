@@ -1,75 +1,159 @@
 # Abstract to Concrete Design
 
-An agentic CLI workflow that moves designers from abstract problem space to evidence-based design brief — before they open Figma.
-
-**Core principle:** Agents sharpen thinking, designers make decisions. Every output is raw material for design judgment, not a directive.
+An agentic CLI workflow that moves designers from scattered context to evidence-based design brief — before they open Figma.
 
 ---
 
-## The Problem
+## The Problem: Scattered Context
 
-Designers often start designing based on gut feeling, limited context, or secondhand briefs. This workflow changes that — making research, competitive analysis, and UX critique part of the design process before a single frame is opened.
+Designers face a common challenge:
 
-The output is a **design brief you can defend**, traceable to real evidence.
+- **MoMs** in Slack threads
+- **Research** in Notion
+- **Stakeholder feedback** in email
+- **Competitive intel** in random docs
+- **Design critiques** in head
+
+Context lives everywhere. The designer holds it all in their head — or doesn't. Important insights get lost. Decisions get made without full picture.
+
+**This system brings context together, validates understanding, and surfaces gaps — before design begins.**
 
 ---
 
 ## How It Works
 
 ```
-/design:new
-  ↓
-/design:feed  (repeat until ready)
-  ↓
-/design:run
-  ↓ Wave 1 (parallel)
-    Research Agent    → What problem are we actually solving?
-    Competitive Agent → What does the landscape look like?
-    Critique Agent    → Where is the current experience failing?
-  ↓ Wave 2
-    Ideation Agent    → What tensions must the designer navigate?
-  ↓ Wave 3
-    Orchestrator      → DESIGN-BRIEF.md
-  ↓
-Open Figma with evidence
+/design:new         → Create project workspace
+       ↓
+/design:feed        → Paste MoMs, emails, docs, Slack threads
+       ↓
+/design:validate    → Verify understanding, detect conflicts
+       ↓
+/design:run         → Run agents (Research → Competitive → Critique)
+       ↓
+/design:validate    → Validate research synthesis
+       ↓
+/design:brief       → Get your evidence-based brief
+       ↓
+Open Figma
 ```
 
-1. **Create a workspace** — set up your project with a one-line description and production reference
-2. **Feed context** — paste MoMs, emails, research docs, Slack threads iteratively; the agent reflects back what it understands and surfaces gaps
-3. **Run agents** — research, competitive analysis, and critique run in parallel; ideation synthesizes their outputs
-4. **Get your brief** — a design brief you can defend, traceable to evidence
+---
+
+## The Scattered Context Solution
+
+| Before | After |
+|--------|-------|
+| MoMs in Slack | All context in `.design/BRIEF.md` |
+| Research in Notion | Synthesized in RESEARCH.md |
+| Competitive intel scattered | Mapped in COMPETITIVE.md |
+| Feedback in emails | Traced to source in BRIEF.md |
+| "What do we know?" | Check GAPS.md or run `/design:status` |
+
+---
+
+## Key Features
+
+### 1. Context Centralization
+Paste anything — MoMs, emails, research docs, Slack threads. The system accumulates all context in one place, traceable to source.
+
+### 2. Validation Gates
+Before agents run, validate your understanding:
+- **Stakeholder mapping**: Who said what?
+- **Conflict detection**: Do stakeholders contradict each other?
+- **Context freshness**: How old is this information?
+
+### 3. Gap Detection
+The system surfaces what's missing:
+- No user research data?
+- No engineering constraints?
+- Missing competitive context?
+
+You'll know what you don't know.
+
+### 4. Learning Loop
+The system remembers past issues:
+- "URL was unreachable last time"
+- "This context contradicted earlier input"
+
+Future runs learn from history.
 
 ---
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `/design:new` | Create a new design project workspace |
-| `/design:feed` | Add context (MoMs, emails, docs, Slack) to the workspace |
-| `/design:run` | Fire all agents and generate your design brief |
-| `/design:brief` | Regenerate brief from existing agent outputs |
-| `/design:status` | Show workspace state and next recommended step |
-
-Full documentation for each command in `source/docs/`.
+| Command | Purpose |
+|---------|---------|
+| `/design:new` | Create project workspace |
+| `/design:feed` | Add context (MoM, email, docs, Slack) |
+| `/design:validate` | Verify understanding, detect conflicts, check freshness |
+| `/design:run` | Execute research agents |
+| `/design:brief` | Generate design brief |
+| `/design:status` | Check current state and next step |
 
 ---
 
 ## Workspace Structure
 
-Running `/design:new` creates a `.design/` directory in your project:
-
 ```
 .design/
-  BRIEF.md          ← accumulates all your pasted context
-  GAPS.md           ← what the agent understands + what's missing
-  DESIGN-STATE.md   ← workflow state tracker
+  BRIEF.md              ← All context, traceable to source
+  GAPS.md               ← What we know vs missing
+  DESIGN-STATE.md       ← Workflow state tracker
+  VALIDATION-REPORT.md  ← Problem validation results
+  PROBLEM-REFLECTION.md ← Your confirmed understanding
+  LEARNING-LOG.md       ← Past issues learned
   research/
-    RESEARCH.md     ← UX problem statement from research agent
-    COMPETITIVE.md  ← landscape, patterns, gaps from competitive agent
-    CRITIQUE.md     ← severity-rated findings from critique agent
-    IDEATION.md     ← reframed problem + design tensions
-  DESIGN-BRIEF.md   ← final output, ready for Figma
+    RESEARCH.md         ← Problem statement
+    COMPETITIVE.md       ← Landscape analysis
+    CRITIQUE.md          ← UX audit
+    IDEATION.md          ← Design tensions
+  DESIGN-BRIEF.md       ← Final output for Figma
+```
+
+---
+
+## Validation: Before Agents Run
+
+```
+/design:feed
+> Paste MoM from product sync...
+
+/design:validate
+> ## Stakeholders
+> | Source | Role | Key Input |
+> |--------|------|-----------|
+> | MoM - Product Sync | PM | Users can't find export |
+>
+> ## Conflicts
+> None detected
+>
+> ## Context Age
+> 2026-03-14 (today) ✅ Fresh
+>
+> ## Problem Reflection
+> What problem are we solving? [Your answer]
+>
+> Ready to proceed? (yes)
+```
+
+---
+
+## Validation: After Research
+
+```
+/design:run (Wave 1 complete)
+/design:validate
+> ## Research Validation
+> Research says: "Users struggle to locate export..."
+>
+> Your earlier reflection: "Users can't find export button"
+>
+> ✓ Matches my understanding
+> ✓ Worth solving
+> ✓ Enough evidence
+>
+> Proceed to Ideation? (yes)
 ```
 
 ---
@@ -77,29 +161,27 @@ Running `/design:new` creates a `.design/` directory in your project:
 ## The Agents
 
 ### Research Agent
-Reads your accumulated context and surfaces **what the data says the problem is**. No solutions, no directions — only a clear UX problem statement with user needs, existing constraints, and unresolved questions.
+"What problem are we actually solving?" — Synthesizes context into a clear problem statement with user needs and constraints.
 
 ### Competitive Agent
-Maps the competitive landscape — who's solving this problem, what patterns have become table stakes, where the gaps and opportunities are. Descriptive, not prescriptive.
+"What does the landscape look like?" — Maps competitors, table stakes, gaps, and opportunities. Descriptive, not prescriptive.
 
 ### Critique Agent
-Audits the current product using your production URL or screenshot. Severity-rated findings (Critical → Low), systemic patterns, accessibility gaps, and — importantly — what's working and should be preserved.
+"Where is the current experience failing?" — Audits your product via URL/screenshot. Severity-rated findings + what's working.
 
 ### Ideation Agent
-Synthesizes all three into a **reframed problem statement** and **design tensions** — the real tradeoffs the design must navigate. Ends with open provocations, not directions. The designer brings the solutions.
+"What tensions must we navigate?" — Synthesizes into design tensions and provocations. Ends with questions, not answers.
 
 ---
 
 ## Design Philosophy
 
-This workflow is intentionally not prescriptive:
+- **Agents surface evidence** — not directions
+- **Competitive shows what exists** — not what to copy
+- **Critique references specifics** — not vague opinions
+- **Ideation opens thinking** — doesn't close it
 
-- Agents surface **what the data says** — not what to build
-- Competitive output shows **what exists** — not what to copy
-- Critique findings reference **specific locations** — not vague opinions
-- Ideation outputs **tensions and provocations** — not directions A, B, C
-
-**The designer's judgment is the point.** Every agent output is raw material to react to, not instructions to follow. Listing directions would anchor creative thinking. Reframing the problem opens it.
+**The designer brings the solutions.** Agents provide the raw material.
 
 ---
 
@@ -112,30 +194,32 @@ This workflow is intentionally not prescriptive:
 
 ## Installation
 
-**Claude Code** (same pattern as GSD / Impeccable):
-
+**Claude Code:**
 ```
 /plugin marketplace add rizkiridha/abstract-to-concreate-design
 /plugin install abstract-to-concrete-design@abstract-to-concrete-design
 ```
 
 **OpenCode CLI:**
-
 ```bash
-# Clone directly and copy dist/opencode/ to your OpenCode config
 git clone https://github.com/rizkiridha/abstract-to-concreate-design.git
-cp -r abstract-to-concreate-design/dist/opencode/.  ~/.config/opencode/
+cp -r abstract-to-concreate-design/dist/opencode/. ~/.config/opencode/
 ```
 
 ---
 
 ## Project Status
 
-This workflow is in active development. Phase 1 covers the full abstract-to-brief pipeline. Future phases:
+**Phase 1:** Abstract → Brief ✅ (complete)
+- Context accumulation
+- Research agents
+- Validation gates
+- Learning loop
 
-- **Phase 2:** Design → Generate design to code
-- **Phase 3:** Code review
-- **Phase 4:** Handoff to engineering
+**Future:**
+- Phase 2: Design → Code generation
+- Phase 3: Code review
+- Phase 4: Engineering handoff
 
 ---
 

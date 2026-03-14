@@ -19,7 +19,12 @@ Before starting, check for past issues:
 
 Before firing any agents:
 
-1. Verify `.design/BRIEF.md` exists and has at least one "Context Added" section with actual content:
+1. **Validate understanding first:**
+   - Check if `.design/VALIDATION-REPORT.md` exists with pre-agent validation complete
+   - If not, prompt: "Run `/design:validate` first to verify problem understanding before running agents."
+   - Don't proceed until validation is done
+
+2. Verify `.design/BRIEF.md` exists and has at least one "Context Added" section with actual content:
    - Parse the most recent "Context Added" section
    - If content is empty or whitespace-only, warn: "The most recent context section appears empty. Add content before running agents."
    - If no valid content, stop.
@@ -58,6 +63,11 @@ Wait for all three to complete before proceeding to Wave 2.
 - Check that RESEARCH.md, COMPETITIVE.md, CRITIQUE.md all exist in `.design/research/`
 - Verify each file has meaningful content (not empty, not just headers)
 - If any are missing or empty, log to LEARNING-LOG.md and notify designer before proceeding
+
+**Post-Research Validation:**
+- Before dispatching Ideation, check if `.design/VALIDATION-REPORT.md` has post-research validation
+- If not, prompt: "Run `/design:validate` to validate research synthesis before proceeding to ideation."
+- Don't proceed to Wave 2 until post-research validation is complete
 
 ## Wave 2 — Sequential (Ideation)
 
